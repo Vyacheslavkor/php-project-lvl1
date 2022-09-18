@@ -1,0 +1,16 @@
+{
+    "name": "hexlet/code",
+    "description": "y",
+    "autoload": {
+        "psr-4": {
+            "Hexlet\\Code\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vyacheslav Korolev",
+            "email": "vkorolev@cs-cart.com"
+        }
+    ],
+    "require": {}
+}
