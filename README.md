@@ -1,7 +1,7 @@
 ### Parity check game:
 [![asciicast](https://asciinema.org/a/522212.svg)](https://asciinema.org/a/522212)
 
-### Calculator game
+### Calculator game:
 [![asciicast](https://asciinema.org/a/522256.svg)](https://asciinema.org/a/522256)
 
 ### Hexlet tests and linter status:
