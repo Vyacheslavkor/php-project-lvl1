@@ -10,7 +10,7 @@
 ### "Progression" game:
 [![asciicast](https://asciinema.org/a/522338.svg)](https://asciinema.org/a/522338)
 
-### "Progression" game:
+### "Prime" game:
 [![asciicast](https://asciinema.org/a/522354.svg)](https://asciinema.org/a/522354)
 
 ### Hexlet tests and linter status:
