@@ -14,7 +14,7 @@ function getRightAnswer(string $question): int
     $numbers = explode(' ', $question);
 
     $position = false;
-    $increment = false;
+    $increment = 0;
 
     foreach ($numbers as $key => $number) {
         if ($number === '..' || (isset($numbers[$key + 1]) && $numbers[$key + 1] === '..')) {
@@ -22,15 +22,15 @@ function getRightAnswer(string $question): int
             continue;
         }
 
-        $increment = $increment !== false ? $increment : (int) $numbers[$key + 1] - (int) $number;
+        $increment = $increment !== 0 ? $increment : (int) $numbers[$key + 1] - (int) $number;
         if ($position !== false) {
             break;
         }
     }
 
     return (int) $position === 0
-        ? (int) $numbers[(int) $position + 1] - $increment
-        : (int) $numbers[(int) $position - 1] + $increment;
+        ? (int) $numbers[(int) $position + 1] - (int) $increment
+        : (int) $numbers[(int) $position - 1] + (int) $increment;
 }
 
 function getQuestion(): string
