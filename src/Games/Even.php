@@ -4,6 +4,7 @@ namespace BrainGames\Games\Even;
 
 const ANSWER_YES = 'yes';
 const ANSWER_NO = 'no';
+const GAME_DESCRIPTION = 'Answer "yes" if the number is even, otherwise answer "no".';
 
 function isRightAnswer($num, $answer): bool
 {
@@ -23,4 +24,9 @@ function isEven(int $num): bool
 function getQuestion(): int
 {
     return random_int(1, 500);
+}
+
+function getGameDescription(): string
+{
+    return GAME_DESCRIPTION;
 }

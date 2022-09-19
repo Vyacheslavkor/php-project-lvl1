@@ -11,14 +11,14 @@ function run(string $gameName)
     $userName = prompt('May I have your name?');
     line("Hello, %s!", $userName);
 
-    line('Answer "yes" if the number is even, otherwise answer "no".');
+    line(getGameDescription($gameName));
 
     for ($round = 1; $round <= MAX_ROUNDS; $round++) {
-        $num = getQuestion($gameName);
-        $answer = prompt("Question: {$num}", false, ' ', true);
+        $question = getQuestion($gameName);
+        $answer = prompt("Question: {$question}", false, ' ');
         line("Your answer: %s", $answer);
-        if (!isRightAnswer($gameName, $num, $answer)) {
-            line("'%s' is wrong answer ;(. Correct answer was '%s'.", $answer, getRightAnswer($gameName, $num));
+        if (!isRightAnswer($gameName, $question, $answer)) {
+            line("'%s' is wrong answer ;(. Correct answer was '%s'.", $answer, getRightAnswer($gameName, $question));
             line('Let\'s try again, %s!', $userName);
             exit();
         }
@@ -34,12 +34,17 @@ function getQuestion(string $gameName): string
     return call_user_func("\\BrainGames\\Games\\{$gameName}\\getQuestion");
 }
 
-function getRightAnswer(string $gameName, int $num): string
+function getRightAnswer($gameName, $question): string
 {
-    return call_user_func("\\BrainGames\\Games\\{$gameName}\\getRightAnswer", $num);
+    return call_user_func("\\BrainGames\\Games\\{$gameName}\\getRightAnswer", $question);
 }
 
-function isRightAnswer(string $gameName, int $num, string $answer): bool
+function isRightAnswer($gameName, $question, $answer): bool
 {
-    return call_user_func("\\BrainGames\\Games\\{$gameName}\\isRightAnswer", $num, $answer);
+    return call_user_func("\\BrainGames\\Games\\{$gameName}\\isRightAnswer", $question, $answer);
+}
+
+function getGameDescription($gameName): string
+{
+    return call_user_func("\\BrainGames\\Games\\{$gameName}\\getGameDescription");
 }

@@ -8,7 +8,8 @@
         "files": [
             "src/Cli.php",
             "src/Engine.php",
-            "src/Games/Even.php"
+            "src/Games/Even.php",
+            "src/Games/Calculator.php"
         ]
     },
     "authors": [
@@ -22,7 +23,8 @@
     },
     "bin": [
         "bin/brain-games",
-        "bin/brain-even"
+        "bin/brain-even",
+        "bin/brain-calc"
     ],
     "license": "proprietary",
     "require-dev": {
