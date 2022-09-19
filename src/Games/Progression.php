@@ -29,8 +29,8 @@ function getRightAnswer(string $question): int
     }
 
     return (int) $position === 0
-        ? (int) $numbers[(int) $position + 1] - (int) $increment
-        : (int) $numbers[(int) $position - 1] + (int) $increment;
+        ? (int) $numbers[(int) $position + 1] - $increment
+        : (int) $numbers[(int) $position - 1] + $increment;
 }
 
 function getQuestion(): string
