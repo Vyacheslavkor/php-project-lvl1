@@ -15,3 +15,6 @@ lint:
 
 install:
 	composer install --no-dev
+
+brain-gcd:
+	./bin/brain-gcd

@@ -9,7 +9,8 @@
             "src/Cli.php",
             "src/Engine.php",
             "src/Games/Even.php",
-            "src/Games/Calculator.php"
+            "src/Games/Calculator.php",
+            "src/Games/Gcd.php"
         ]
     },
     "authors": [
@@ -24,7 +25,8 @@
     "bin": [
         "bin/brain-games",
         "bin/brain-even",
-        "bin/brain-calc"
+        "bin/brain-calc",
+        "bin/brain-gcd"
     ],
     "license": "proprietary",
     "require-dev": {
