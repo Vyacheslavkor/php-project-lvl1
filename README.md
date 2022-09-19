@@ -1,5 +1,8 @@
-### How to use:
+### Parity check game:
 [![asciicast](https://asciinema.org/a/522212.svg)](https://asciinema.org/a/522212)
+
+### Calculator game
+[![asciicast](https://asciinema.org/a/522256.svg)](https://asciinema.org/a/522256)
 
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/Vyacheslavkor/php-project-lvl1/workflows/hexlet-check/badge.svg)](https://github.com/Vyacheslavkor/php-project-lvl1/actions)
