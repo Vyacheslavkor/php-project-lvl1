@@ -4,12 +4,12 @@ namespace BrainGames\Games\Progression;
 
 const GAME_DESCRIPTION = 'What number is missing in the progression?';
 
-function isRightAnswer($question, $answer): bool
+function isRightAnswer(string $question, string $answer): bool
 {
     return (int) $answer === getRightAnswer($question);
 }
 
-function getRightAnswer($question): int
+function getRightAnswer(string $question): int
 {
     $numbers = explode(' ', $question);
 
@@ -22,13 +22,15 @@ function getRightAnswer($question): int
             continue;
         }
 
-        $increment = $increment ?: $numbers[$key + 1] - $number;
+        $increment = $increment !== false ? $increment : (int) $numbers[$key + 1] - (int) $number;
         if ($position !== false) {
             break;
         }
     }
 
-    return $position === 0 ? $numbers[$position + 1] - $increment : $numbers[$position - 1] + $increment;
+    return $position === 0
+        ? $numbers[(int) $position + 1] - (int) $increment
+        : $numbers[(int) $position - 1] + (int) $increment;
 }
 
 function getQuestion(): string

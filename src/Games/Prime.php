@@ -6,17 +6,17 @@ const GAME_DESCRIPTION = 'Answer "yes" if given number is prime. Otherwise answe
 const ANSWER_YES = 'yes';
 const ANSWER_NO = 'no';
 
-function isRightAnswer($question, $answer): bool
+function isRightAnswer(string $question, string $answer): bool
 {
     return $answer === getRightAnswer($question);
 }
 
-function getRightAnswer($question): string
+function getRightAnswer(string $question): string
 {
-    return isPrime($question) ? ANSWER_YES : ANSWER_NO;
+    return isPrime((int) $question) ? ANSWER_YES : ANSWER_NO;
 }
 
-function isPrime($question): bool
+function isPrime(int $question): bool
 {
     if ($question === 1) {
         return false;

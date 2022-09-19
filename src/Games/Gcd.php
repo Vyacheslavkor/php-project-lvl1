@@ -4,19 +4,19 @@ namespace BrainGames\Games\Gcd;
 
 const GAME_DESCRIPTION = 'Find the greatest common divisor of given numbers.';
 
-function isRightAnswer($question, $answer): bool
+function isRightAnswer(string $question, string $answer): bool
 {
     return (int) $answer === getRightAnswer($question);
 }
 
-function getRightAnswer($question): int
+function getRightAnswer(string $question): int
 {
     [$firstNum, $secondNum] = explode(' ', $question);
 
     return findGreatestCommonDivisor($firstNum, $secondNum);
 }
 
-function findGreatestCommonDivisor($firstNum, $secondNum)
+function findGreatestCommonDivisor(string $firstNum, string $secondNum): string
 {
     if ($firstNum > $secondNum) {
         $num = $firstNum;

@@ -15,7 +15,7 @@ function run(string $gameName)
 
     for ($round = 1; $round <= MAX_ROUNDS; $round++) {
         $question = getQuestion($gameName);
-        $answer = prompt("Question: {$question}", false, ' ');
+        $answer = prompt("Question: {$question}");
         line("Your answer: %s", $answer);
         if (!isRightAnswer($gameName, $question, $answer)) {
             line("'%s' is wrong answer ;(. Correct answer was '%s'.", $answer, getRightAnswer($gameName, $question));
@@ -31,20 +31,24 @@ function run(string $gameName)
 
 function getQuestion(string $gameName): string
 {
-    return call_user_func("\\BrainGames\\Games\\{$gameName}\\getQuestion");
+    $function = "\\BrainGames\\Games\\{$gameName}\\getQuestion";
+    return $function();
 }
 
-function getRightAnswer($gameName, $question): string
+function getRightAnswer(string $gameName, string $question): string
 {
-    return call_user_func("\\BrainGames\\Games\\{$gameName}\\getRightAnswer", $question);
+    $function = "\\BrainGames\\Games\\{$gameName}\\getRightAnswer";
+    return $function($question);
 }
 
-function isRightAnswer($gameName, $question, $answer): bool
+function isRightAnswer(string $gameName, string $question, string $answer): bool
 {
-    return call_user_func("\\BrainGames\\Games\\{$gameName}\\isRightAnswer", $question, $answer);
+    $function = "\\BrainGames\\Games\\{$gameName}\\isRightAnswer";
+    return $function($question, $answer);
 }
 
-function getGameDescription($gameName): string
+function getGameDescription(string $gameName): string
 {
-    return call_user_func("\\BrainGames\\Games\\{$gameName}\\getGameDescription");
+    $function = "\\BrainGames\\Games\\{$gameName}\\getGameDescription";
+    return $function();
 }
