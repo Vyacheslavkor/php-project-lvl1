@@ -11,40 +11,90 @@ function run(string $gameName)
     $userName = prompt('May I have your name?');
     line("Hello, %s!", $userName);
 
-    line(getGameDescription($gameName));
+    $gameDescription = getGameDescription($gameName);
 
-    for ($round = 1; $round <= MAX_ROUNDS; $round++) {
-        $question = getQuestion($gameName);
-        $answer = prompt("Question: {$question}", false, ' ');
-        line("Your answer: %s", $answer);
-        if (!isRightAnswer($gameName, $question, $answer)) {
-            line("'%s' is wrong answer ;(. Correct answer was '%s'.", $answer, getRightAnswer($gameName, $question));
-            line('Let\'s try again, %s!', $userName);
-            exit();
-        }
-
-        line('Correct!');
-    }
+    line($gameDescription);
+    startQuestions($gameName, $userName);
 
     line("Congratulations, %s!", $userName);
 }
 
-function getQuestion(string $gameName): string
+function startQuestions(string $gameName, string $userName)
 {
-    return call_user_func("\\BrainGames\\Games\\{$gameName}\\getQuestion");
+    for ($round = 1; $round <= MAX_ROUNDS; $round++) {
+        $question = getQuestion($gameName);
+
+        $answer = prompt("Question: {$question}");
+        line("Your answer: %s", $answer);
+        if (!isRightAnswer($gameName, $question, $answer)) {
+            showWrongMessage($gameName, $question, $userName, $answer);
+        }
+
+        line('Correct!');
+    }
 }
 
-function getRightAnswer($gameName, $question): string
+function showWrongMessage(string $gameName, string $question, string $userName, string $answer)
 {
-    return call_user_func("\\BrainGames\\Games\\{$gameName}\\getRightAnswer", $question);
+    $rightAnswer = getRightAnswer($gameName, $question);
+    if (is_null($rightAnswer)) {
+        line('ERROR');
+        exit;
+    }
+
+    line("'%s' is wrong answer ;(. Correct answer was '%s'.", $answer, $rightAnswer);
+    line('Let\'s try again, %s!', $userName);
+    exit();
 }
 
-function isRightAnswer($gameName, $question, $answer): bool
+function welcomeAndSayHello()
 {
-    return call_user_func("\\BrainGames\\Games\\{$gameName}\\isRightAnswer", $question, $answer);
+    line('Welcome to the Brain Games!');
+    $userName = prompt('May I have your name?');
+    line("Hello, %s!", $userName);
 }
 
-function getGameDescription($gameName): string
+function getQuestion(string $gameName)
 {
-    return call_user_func("\\BrainGames\\Games\\{$gameName}\\getGameDescription");
+    $function = "\\BrainGames\\Games\\{$gameName}\\getQuestion";
+
+    if (is_callable($function)) {
+        return $function();
+    }
+
+    line('ERROR');
+    exit;
+}
+
+function getRightAnswer(string $gameName, string $question)
+{
+    $function = "\\BrainGames\\Games\\{$gameName}\\getRightAnswer";
+    if (is_callable($function)) {
+        return $function($question);
+    }
+
+    line('ERROR');
+    exit;
+}
+
+function isRightAnswer(string $gameName, string $question, string $answer): bool
+{
+    $function = "\\BrainGames\\Games\\{$gameName}\\isRightAnswer";
+    if (is_callable($function)) {
+        return $function($question, $answer);
+    }
+
+    line('ERROR');
+    exit;
+}
+
+function getGameDescription(string $gameName)
+{
+    $function = "\\BrainGames\\Games\\{$gameName}\\getGameDescription";
+    if (is_callable($function)) {
+        return $function();
+    }
+
+    line('ERROR');
+    exit;
 }

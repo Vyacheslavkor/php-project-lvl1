@@ -6,9 +6,9 @@ const ANSWER_YES = 'yes';
 const ANSWER_NO = 'no';
 const GAME_DESCRIPTION = 'Answer "yes" if the number is even, otherwise answer "no".';
 
-function isRightAnswer($num, $answer): bool
+function isRightAnswer(string $num, string $answer): bool
 {
-    return $answer === getRightAnswer($num);
+    return $answer === getRightAnswer((int) $num);
 }
 
 function getRightAnswer(int $num): string

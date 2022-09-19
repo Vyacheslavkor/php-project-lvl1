@@ -4,31 +4,43 @@ namespace BrainGames\Games\Progression;
 
 const GAME_DESCRIPTION = 'What number is missing in the progression?';
 
-function isRightAnswer($question, $answer): bool
+function isRightAnswer(string $question, string $answer): bool
 {
     return (int) $answer === getRightAnswer($question);
 }
 
-function getRightAnswer($question): int
+function getRightAnswer(string $question): int
 {
     $numbers = explode(' ', $question);
 
-    $position = false;
-    $increment = false;
+    $position = getMissingNumberPosition($numbers);
+    $increment = getIncrement($numbers);
 
+    return $position === 0
+        ? (int) $numbers[$position + 1] - $increment
+        : (int) $numbers[$position - 1] + $increment;
+}
+
+function getIncrement(array $numbers): int
+{
+    $firstNumber = 0;
+    $secondNumber = 0;
     foreach ($numbers as $key => $number) {
         if ($number === '..' || (isset($numbers[$key + 1]) && $numbers[$key + 1] === '..')) {
-            $position = $number === '..' ? $key : $key + 1;
             continue;
         }
 
-        $increment = $increment ?: $numbers[$key + 1] - $number;
-        if ($position !== false) {
-            break;
-        }
+        $firstNumber = $number;
+        $secondNumber = $numbers[$key + 1];
+        break;
     }
 
-    return $position === 0 ? $numbers[$position + 1] - $increment : $numbers[$position - 1] + $increment;
+    return (int) $secondNumber - (int) $firstNumber;
+}
+
+function getMissingNumberPosition(array $numbers): int
+{
+    return array_search('..', $numbers, true);
 }
 
 function getQuestion(): string
@@ -39,13 +51,9 @@ function getQuestion(): string
     $startValue = random_int(1, 500);
 
     $result = [];
-    $value = false;
+    $value = $startValue;
 
     for ($i = 1; $i <= $progressionLength; $i++) {
-        if (!$result) {
-            $value = $startValue;
-        }
-
         if ($i === $missingNumberPosition) {
             $result[] = '..';
             $value += $incrementValue;

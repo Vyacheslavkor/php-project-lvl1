@@ -4,24 +4,24 @@ namespace BrainGames\Games\Calculator;
 
 const GAME_DESCRIPTION = 'What is the result of the expression?';
 
-function isRightAnswer($question, $answer): bool
+function isRightAnswer(string $question, string $answer): bool
 {
     return (int) $answer === getRightAnswer($question);
 }
 
-function getRightAnswer($question): int
+function getRightAnswer(string $question): int
 {
     [$firstNum, $sign, $secondNum] = explode(' ', $question);
 
     if ($sign === '*') {
-        return $firstNum * $secondNum;
+        return (int) $firstNum * (int) $secondNum;
     }
 
     if ($sign === '+') {
-        return $firstNum + $secondNum;
+        return (int) $firstNum + (int) $secondNum;
     }
 
-    return $firstNum - $secondNum;
+    return (int) $firstNum - (int) $secondNum;
 }
 
 function getQuestion(): string
