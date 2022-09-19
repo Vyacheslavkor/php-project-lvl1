@@ -11,14 +11,32 @@ function run(string $gameName)
     $userName = prompt('May I have your name?');
     line("Hello, %s!", $userName);
 
-    line(getGameDescription($gameName));
+    $gameDescription = getGameDescription($gameName);
+    if (is_null($gameDescription)) {
+        line('ERROR');
+        exit;
+    }
+
+    line($gameDescription);
 
     for ($round = 1; $round <= MAX_ROUNDS; $round++) {
         $question = getQuestion($gameName);
+
+        if (is_null($question)) {
+            line('ERROR');
+            exit;
+        }
+
         $answer = prompt("Question: {$question}");
         line("Your answer: %s", $answer);
         if (!isRightAnswer($gameName, $question, $answer)) {
-            line("'%s' is wrong answer ;(. Correct answer was '%s'.", $answer, getRightAnswer($gameName, $question));
+            $rightAnswer = getRightAnswer($gameName, $question);
+            if (is_null($rightAnswer)) {
+                line('ERROR');
+                exit;
+            }
+
+            line("'%s' is wrong answer ;(. Correct answer was '%s'.", $answer, $rightAnswer);
             line('Let\'s try again, %s!', $userName);
             exit();
         }
@@ -29,30 +47,43 @@ function run(string $gameName)
     line("Congratulations, %s!", $userName);
 }
 
-function getQuestion(string $gameName): string
+function getQuestion(string $gameName)
 {
     $function = "\\BrainGames\\Games\\{$gameName}\\getQuestion";
-    /* @var callable $function */
-    return $function();
+
+    if (is_callable($function)) {
+        return $function();
+    }
+
+    return null;
 }
 
-function getRightAnswer(string $gameName, string $question): string
+function getRightAnswer(string $gameName, string $question)
 {
     $function = "\\BrainGames\\Games\\{$gameName}\\getRightAnswer";
-    /* @var callable $function */
-    return $function($question);
+    if (is_callable($function)) {
+        return $function($question);
+    }
+
+    return null;
 }
 
 function isRightAnswer(string $gameName, string $question, string $answer): bool
 {
     $function = "\\BrainGames\\Games\\{$gameName}\\isRightAnswer";
-    /* @var callable $function */
-    return $function($question, $answer);
+    if (is_callable($function)) {
+        return $function($question, $answer);
+    }
+
+    return false;
 }
 
-function getGameDescription(string $gameName): string
+function getGameDescription(string $gameName)
 {
     $function = "\\BrainGames\\Games\\{$gameName}\\getGameDescription";
-    /* @var callable $function */
-    return $function();
+    if (is_callable($function)) {
+        return $function();
+    }
+
+    return null;
 }

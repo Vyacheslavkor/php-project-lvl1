@@ -28,9 +28,9 @@ function getRightAnswer(string $question): int
         }
     }
 
-    return $position === 0
-        ? (int) $numbers[$position + 1] - $increment
-        : (int) $numbers[$position - 1] + $increment;
+    return (int) $position === 0
+        ? (int) $numbers[(int) $position + 1] - $increment
+        : (int) $numbers[(int) $position - 1] + $increment;
 }
 
 function getQuestion(): string
@@ -41,13 +41,9 @@ function getQuestion(): string
     $startValue = random_int(1, 500);
 
     $result = [];
-    $value = false;
+    $value = $startValue;
 
     for ($i = 1; $i <= $progressionLength; $i++) {
-        if (empty($result)) {
-            $value = $startValue;
-        }
-
         if ($i === $missingNumberPosition) {
             $result[] = '..';
             $value += $incrementValue;
