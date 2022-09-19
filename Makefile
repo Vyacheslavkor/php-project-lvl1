@@ -14,7 +14,7 @@ lint:
 	composer exec --verbose phpcs -- --standard=PSR12 src bin
 
 install:
-	composer install --no-dev
+	composer install
 
 brain-gcd:
 	./bin/brain-gcd
