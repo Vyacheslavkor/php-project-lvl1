@@ -13,10 +13,10 @@ function getRightAnswer(string $question): int
 {
     [$firstNum, $secondNum] = explode(' ', $question);
 
-    return findGreatestCommonDivisor($firstNum, $secondNum);
+    return findGreatestCommonDivisor((int) $firstNum, (int) $secondNum);
 }
 
-function findGreatestCommonDivisor(string $firstNum, string $secondNum): string
+function findGreatestCommonDivisor(int $firstNum, int $secondNum): string
 {
     if ($firstNum > $secondNum) {
         $num = $firstNum;

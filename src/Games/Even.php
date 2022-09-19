@@ -8,7 +8,7 @@ const GAME_DESCRIPTION = 'Answer "yes" if the number is even, otherwise answer "
 
 function isRightAnswer(string $num, string $answer): bool
 {
-    return $answer === getRightAnswer($num);
+    return $answer === getRightAnswer((int) $num);
 }
 
 function getRightAnswer(int $num): string

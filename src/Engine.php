@@ -32,23 +32,27 @@ function run(string $gameName)
 function getQuestion(string $gameName): string
 {
     $function = "\\BrainGames\\Games\\{$gameName}\\getQuestion";
+    /* @var callable $function */
     return $function();
 }
 
 function getRightAnswer(string $gameName, string $question): string
 {
     $function = "\\BrainGames\\Games\\{$gameName}\\getRightAnswer";
+    /* @var callable $function */
     return $function($question);
 }
 
 function isRightAnswer(string $gameName, string $question, string $answer): bool
 {
     $function = "\\BrainGames\\Games\\{$gameName}\\isRightAnswer";
+    /* @var callable $function */
     return $function($question, $answer);
 }
 
 function getGameDescription(string $gameName): string
 {
     $function = "\\BrainGames\\Games\\{$gameName}\\getGameDescription";
+    /* @var callable $function */
     return $function();
 }

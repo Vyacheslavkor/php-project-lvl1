@@ -29,8 +29,8 @@ function getRightAnswer(string $question): int
     }
 
     return $position === 0
-        ? $numbers[(int) $position + 1] - (int) $increment
-        : $numbers[(int) $position - 1] + (int) $increment;
+        ? (int) $numbers[$position + 1] - $increment
+        : (int) $numbers[$position - 1] + $increment;
 }
 
 function getQuestion(): string
@@ -44,7 +44,7 @@ function getQuestion(): string
     $value = false;
 
     for ($i = 1; $i <= $progressionLength; $i++) {
-        if (!$result) {
+        if (empty($result)) {
             $value = $startValue;
         }
 
