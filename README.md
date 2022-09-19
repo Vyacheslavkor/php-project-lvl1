@@ -4,8 +4,11 @@
 ### Calculator game:
 [![asciicast](https://asciinema.org/a/522256.svg)](https://asciinema.org/a/522256)
 
-### Greatest common divisor:
+### Greatest common divisor game:
 [![asciicast](https://asciinema.org/a/522321.svg)](https://asciinema.org/a/522321)
+
+### Progression game:
+[![asciicast](https://asciinema.org/a/522338.svg)](https://asciinema.org/a/522338)
 
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/Vyacheslavkor/php-project-lvl1/workflows/hexlet-check/badge.svg)](https://github.com/Vyacheslavkor/php-project-lvl1/actions)
